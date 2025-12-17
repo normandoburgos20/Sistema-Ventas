@@ -1,3 +1,4 @@
+
 package Modelo;
 
 public class Producto {
@@ -105,5 +106,7 @@ public class Producto {
     public void setEstado(int estado) {
         this.estado = estado;
     }
+
+
 
 }
