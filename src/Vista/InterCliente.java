@@ -320,7 +320,7 @@ public class InterCliente extends javax.swing.JInternalFrame {
 
         if (opcion == JOptionPane.YES_OPTION) {
             this.dispose();
-            new LoginFrm().setVisible(true);
+            new FrmMenu().setVisible(true);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 

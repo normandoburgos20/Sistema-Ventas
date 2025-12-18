@@ -38,15 +38,14 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenuItem9 = new javax.swing.JMenuItem();
         jMenuItem18 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        nuevo_usuario = new javax.swing.JMenu();
-        jMenuItem20 = new javax.swing.JMenuItem();
+        nuevo_proveedor = new javax.swing.JMenu();
+        jMenuItem_nuevo_proveedor = new javax.swing.JMenuItem();
         nuevo_producto = new javax.swing.JMenu();
         jMenuItem_nuevo_producto = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem_nueva_Categoria = new javax.swing.JMenuItem();
         jMenuItem_gestionar_categorias = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem15 = new javax.swing.JMenuItem();
@@ -64,26 +63,26 @@ public class FrmMenu extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(150, 50));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        nuevo_usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
-        nuevo_usuario.setText("PROVEEDORES");
-        nuevo_usuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        nuevo_usuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nuevo_usuario.setMinimumSize(new java.awt.Dimension(150, 30));
-        nuevo_usuario.setName(""); // NOI18N
-        nuevo_usuario.setPreferredSize(new java.awt.Dimension(180, 30));
+        nuevo_proveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/usuario.png"))); // NOI18N
+        nuevo_proveedor.setText("PROVEEDORES");
+        nuevo_proveedor.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        nuevo_proveedor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nuevo_proveedor.setMinimumSize(new java.awt.Dimension(150, 30));
+        nuevo_proveedor.setName(""); // NOI18N
+        nuevo_proveedor.setPreferredSize(new java.awt.Dimension(180, 30));
 
-        jMenuItem20.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo.png"))); // NOI18N
-        jMenuItem20.setText("Nuevo Proveedor");
-        jMenuItem20.setPreferredSize(new java.awt.Dimension(180, 30));
-        jMenuItem20.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem_nuevo_proveedor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jMenuItem_nuevo_proveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo.png"))); // NOI18N
+        jMenuItem_nuevo_proveedor.setText("Gestionar Proveedores");
+        jMenuItem_nuevo_proveedor.setPreferredSize(new java.awt.Dimension(180, 30));
+        jMenuItem_nuevo_proveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem20ActionPerformed(evt);
+                jMenuItem_nuevo_proveedorActionPerformed(evt);
             }
         });
-        nuevo_usuario.add(jMenuItem20);
+        nuevo_proveedor.add(jMenuItem_nuevo_proveedor);
 
-        jMenuBar1.add(nuevo_usuario);
+        jMenuBar1.add(nuevo_proveedor);
 
         nuevo_producto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/producto.png"))); // NOI18N
         nuevo_producto.setText("PRODUCTO");
@@ -138,11 +137,6 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenu3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jMenu3.setMinimumSize(new java.awt.Dimension(120, 50));
         jMenu3.setPreferredSize(new java.awt.Dimension(140, 50));
-
-        jMenuItem6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/nuevo-cliente.png"))); // NOI18N
-        jMenuItem6.setText("Nuevo Cliente");
-        jMenu3.add(jMenuItem6);
 
         jMenuItem7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cliente.png"))); // NOI18N
@@ -222,9 +216,12 @@ public class FrmMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem_gestonar_ventasActionPerformed
 
-    private void jMenuItem20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem20ActionPerformed
+    private void jMenuItem_nuevo_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nuevo_proveedorActionPerformed
+
+        InterProveedores interProveedor = new InterProveedores();
+        jDesktopPane_menu.add(interProveedor);
+        interProveedor.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_nuevo_proveedorActionPerformed
 
     private void jMenuItem_nuevo_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nuevo_productoActionPerformed
         InterProducto interProducto = new InterProducto();
@@ -297,16 +294,15 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem18;
     private javax.swing.JMenuItem jMenuItem19;
-    private javax.swing.JMenuItem jMenuItem20;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItem_gestionar_categorias;
     private javax.swing.JMenuItem jMenuItem_gestonar_ventas;
     private javax.swing.JMenuItem jMenuItem_nueva_Categoria;
     private javax.swing.JMenuItem jMenuItem_nuevo_producto;
+    private javax.swing.JMenuItem jMenuItem_nuevo_proveedor;
     private javax.swing.JMenu jMenu_nueva_venta;
     private javax.swing.JMenu nuevo_producto;
-    private javax.swing.JMenu nuevo_usuario;
+    private javax.swing.JMenu nuevo_proveedor;
     // End of variables declaration//GEN-END:variables
 }

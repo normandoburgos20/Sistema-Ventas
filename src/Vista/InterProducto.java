@@ -367,7 +367,7 @@ public final class InterProducto extends javax.swing.JInternalFrame {
 
         if (opcion == JOptionPane.YES_OPTION) {
             this.dispose();
-            new Vista.LoginFrm().setVisible(true);
+            new Vista.FrmMenu().setVisible(true);
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 

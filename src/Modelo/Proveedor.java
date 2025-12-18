@@ -12,6 +12,7 @@ public class Proveedor {
     private String provincia;
     private String pais;
     private String contacto;
+    private int idProducto;
 
     //Contructor
     public Proveedor() {
@@ -20,15 +21,27 @@ public class Proveedor {
         this.provincia = "";
         this.pais = "";
         this.contacto="";
+        this.idProducto=0;
     }
 
-    public Proveedor(int id_proveedor, String nombre, String provincia, String pais, String contacto) {
+    public Proveedor(int id_proveedor, String nombre, String provincia, String pais, String contacto, int idProducto) {
         this.id_proveedor = id_proveedor;
         this.nombre = nombre;
         this.provincia = provincia;
         this.pais = pais;
         this.contacto = contacto;
+        this.idProducto = idProducto;
     }
+
+    public int getIdProducto() {
+        return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
+    }
+
+    
 
     public int getId_proveedor() {
         return id_proveedor;
