@@ -91,15 +91,35 @@ public class InterCliente extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, 90, -1));
 
         txt_nombre.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_nombreKeyPressed(evt);
+            }
+        });
         getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 170, -1));
 
         txt_apellido.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_apellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_apellidoKeyPressed(evt);
+            }
+        });
         getContentPane().add(txt_apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 170, -1));
 
         txtDni.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txtDni.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDniKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtDni, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 170, -1));
 
         txt_telefono.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        txt_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_telefonoKeyPressed(evt);
+            }
+        });
         getContentPane().add(txt_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 140, 170, -1));
 
         jButton_Guardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -334,6 +354,34 @@ public class InterCliente extends javax.swing.JInternalFrame {
         txt_direccion.setText(tablaClientes.getValueAt(fila, 5).toString());
 
     }//GEN-LAST:event_tablaClientesMouseClicked
+
+    private void txt_nombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_nombreKeyPressed
+         //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txt_apellido.requestFocus();
+        }
+    }//GEN-LAST:event_txt_nombreKeyPressed
+
+    private void txt_apellidoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_apellidoKeyPressed
+        //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txtDni.requestFocus();
+        }
+    }//GEN-LAST:event_txt_apellidoKeyPressed
+
+    private void txtDniKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDniKeyPressed
+         //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txt_telefono.requestFocus();
+        }
+    }//GEN-LAST:event_txtDniKeyPressed
+
+    private void txt_telefonoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_telefonoKeyPressed
+         //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txt_direccion.requestFocus();
+        }
+    }//GEN-LAST:event_txt_telefonoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

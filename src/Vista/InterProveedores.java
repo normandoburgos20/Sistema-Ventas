@@ -5,6 +5,7 @@ import Controlador.Ctrl_Proveedor;
 import conexion.Conexion;
 import java.awt.Color;
 import java.awt.HeadlessException;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -121,11 +122,22 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
         lblNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/producto.png"))); // NOI18N
         lblNombre.setText("Nombre:");
         getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
+
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 125, -1));
 
         txtProvincia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtProvinciaActionPerformed(evt);
+            }
+        });
+        txtProvincia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtProvinciaKeyPressed(evt);
             }
         });
         getContentPane().add(txtProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 125, -1));
@@ -154,11 +166,23 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
         lblPrecio2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPrecio2.setText("Pais:");
         getContentPane().add(lblPrecio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, -1));
+
+        txtPais.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPaisKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtPais, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 125, -1));
 
         lblPrecio3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPrecio3.setText("Provincia: ");
         getContentPane().add(lblPrecio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+
+        txtContacto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtContactoKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtContacto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 125, -1));
 
         lblPrecio4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -380,6 +404,34 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
     private void jComboBox_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_productoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_productoActionPerformed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txtProvincia.requestFocus();
+        }
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtProvinciaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtProvinciaKeyPressed
+       //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txtPais.requestFocus();
+        }
+    }//GEN-LAST:event_txtProvinciaKeyPressed
+
+    private void txtPaisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPaisKeyPressed
+        //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txtContacto.requestFocus();
+        }
+    }//GEN-LAST:event_txtPaisKeyPressed
+
+    private void txtContactoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtContactoKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        txtContacto.transferFocus();   
+    }
+    
+    }//GEN-LAST:event_txtContactoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

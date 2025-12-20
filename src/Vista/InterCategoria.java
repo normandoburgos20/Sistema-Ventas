@@ -4,17 +4,29 @@ import Controlador.Ctrl_Categoria;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 import Modelo.Categoria;
+import conexion.Conexion;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  */
 public class InterCategoria extends javax.swing.JInternalFrame {
 
+    private int idCategoria;
     public InterCategoria() {
         initComponents();
-        this.setSize(new Dimension(400, 200));
+        this.setSize(new Dimension(470, 420));
         this.setTitle("Nueva Categoria");
-        
+        //Cargar tabla
+        this.CargarTablaCategorias();
         
     }
 
@@ -30,8 +42,14 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txt_descripcion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnGuardar1 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         jLabel_wallpaper = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable_categorias = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
@@ -50,25 +68,74 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         txt_descripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 170, -1));
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 204));
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGuardar1.setText("Guardar");
+        btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardar1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 90, 90, 30));
+        getContentPane().add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 30));
+
+        btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, 30));
+
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, -1, 30));
+
+        btnLimpiar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, 30));
+
+        btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, 30));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo2.jpg"))); // NOI18N
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 170));
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 150));
+
+        jTable_categorias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable_categorias);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 420, 200));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        Categoria categoria = new Categoria();
+    private void btnGuardar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardar1ActionPerformed
+         Categoria categoria = new Categoria();
         Ctrl_Categoria controlCategoria = new Ctrl_Categoria();
 
         //validamos camoos vacios
@@ -89,14 +156,147 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         }
         //limpiar campo
         txt_descripcion.setText("");
-    }//GEN-LAST:event_jButton1ActionPerformed
+        this.CargarTablaCategorias();
+    }//GEN-LAST:event_btnGuardar1ActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        if (!txt_descripcion.getText().isEmpty()) {
+            Categoria categoria = new Categoria();
+            Ctrl_Categoria controlCategoria = new Ctrl_Categoria();
+
+            categoria.setDescripcion(txt_descripcion.getText().trim());
+            if (controlCategoria.actualizar(categoria, idCategoria)) {
+                JOptionPane.showMessageDialog(null, "Categoria Actulizada");
+                txt_descripcion.setText("");
+                this.CargarTablaCategorias();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al actualizar Categoria");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if (!txt_descripcion.getText().isEmpty()) {
+            Categoria categoria = new Categoria();
+            Ctrl_Categoria controlCategoria = new Ctrl_Categoria();
+
+            categoria.setDescripcion(txt_descripcion.getText().trim());
+            if (!controlCategoria.eliminar(idCategoria)) {
+                JOptionPane.showMessageDialog(null, "Categoria Eliminada");
+                txt_descripcion.setText("");
+                this.CargarTablaCategorias();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al Eliminar Categoria");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void limpiar() {
+        txt_descripcion.setText("");
+    }
+    
+    
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        // TODO add your handling code here:
+        int opcion = JOptionPane.showConfirmDialog(this,
+            "¿Desea cerrar sesión?",
+            "Confirmar salida",
+            JOptionPane.YES_NO_OPTION);
+
+        if (opcion == JOptionPane.YES_OPTION) {
+            this.dispose();
+            new Vista.FrmMenu().setVisible(true);
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar1;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_wallpaper;
+    public static javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JTable jTable_categorias;
     private javax.swing.JTextField txt_descripcion;
     // End of variables declaration//GEN-END:variables
+    /*
+     * *****************************************************
+     * metodo para mostrar todos las categorias registradas
+     * *****************************************************
+     */
+    private void CargarTablaCategorias() {
+        Connection con = Conexion.conectar();
+        DefaultTableModel model = new DefaultTableModel();
+        String sql = "select idCategoria, descripcion, estado from categoria";
+        Statement st;
+        try {
+            st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            InterCategoria.jTable_categorias = new JTable(model);
+            InterCategoria.jScrollPane1.setViewportView(InterCategoria.jTable_categorias);
+
+            model.addColumn("idCategoria");
+            model.addColumn("descripcion");
+            model.addColumn("estado");
+
+            while (rs.next()) {
+                Object fila[] = new Object[3];
+                for (int i = 0; i < 3; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error al llenar la tabla categorias: " + e);
+        }
+        //evento para obtener campo al cual el usuario da click
+        //y obtener la interfaz que mostrara la informacion general
+        jTable_categorias.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = jTable_categorias.rowAtPoint(e.getPoint());
+                int columna_point = 0;
+
+                if (fila_point > -1) {
+                    idCategoria = (int) model.getValueAt(fila_point, columna_point);
+                    EnviarDatosCategoriaSeleccionada(idCategoria);
+                }
+            }
+        });
+    }
+
+    /*
+     * **************************************************
+     * Metodo que envia datos seleccionados
+     * **************************************************
+     */
+    private void EnviarDatosCategoriaSeleccionada(int idCategoria) {
+        try {
+            Connection con = Conexion.conectar();
+            PreparedStatement pst = con.prepareStatement(
+                    "select * from categoria where idCategoria = '" + idCategoria + "'");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                txt_descripcion.setText(rs.getString("descripcion"));
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error al seleccionar categoria: " + e);
+        }
+    }
+
 }

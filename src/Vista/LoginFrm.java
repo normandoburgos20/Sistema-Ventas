@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import Modelo.UsuarioDAU;
 import javax.swing.JOptionPane;
 import Vista.FrmMenu;
+import java.awt.event.KeyEvent;
 
 public class LoginFrm extends javax.swing.JFrame {
 
@@ -178,7 +179,9 @@ public class LoginFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioKeyPressed
 
     private void txtClaveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtClaveKeyPressed
-        
+         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        btnIngresar.doClick();  
+    }
     }//GEN-LAST:event_txtClaveKeyPressed
 
     /**

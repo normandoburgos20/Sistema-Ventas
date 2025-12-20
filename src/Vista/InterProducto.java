@@ -97,6 +97,7 @@ public final class InterProducto extends javax.swing.JInternalFrame {
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +106,7 @@ public final class InterProducto extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 206, -1, -1));
 
+        btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +115,7 @@ public final class InterProducto extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 206, -1, -1));
 
+        btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,6 +124,7 @@ public final class InterProducto extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 206, -1, -1));
 
+        btnLimpiar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,6 +133,7 @@ public final class InterProducto extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(303, 206, -1, -1));
 
+        btnSalir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,11 +147,23 @@ public final class InterProducto extends javax.swing.JInternalFrame {
         lblNombre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/producto.png"))); // NOI18N
         lblNombre.setText("Nombre:");
         getContentPane().add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
+
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNombreKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, 125, -1));
 
         lblPrecio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPrecio.setText("Categoria:");
         getContentPane().add(lblPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
+
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 125, -1));
 
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -177,17 +194,35 @@ public final class InterProducto extends javax.swing.JInternalFrame {
         lblPrecio2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPrecio2.setText("Descripcion:");
         getContentPane().add(lblPrecio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, -1, -1));
+
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 110, 125, -1));
 
         lblPrecio3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPrecio3.setText("Precio: ");
         getContentPane().add(lblPrecio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
+
+        txtCodigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCodigoKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 125, -1));
 
         lblPrecio4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lblPrecio4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblPrecio4.setText("Codigo: ");
         getContentPane().add(lblPrecio4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
+
+        txtStock.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtStockKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 50, 125, -1));
 
         jComboBox_categoria.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -273,7 +308,8 @@ public final class InterProducto extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error inesperado: " + e.getMessage());
         }
-
+        listar();
+        limpiar();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
@@ -387,6 +423,38 @@ public final class InterProducto extends javax.swing.JInternalFrame {
     private void jComboBox_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_categoriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_categoriaActionPerformed
+
+    private void txtNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyPressed
+        //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txtStock.requestFocus();
+        }
+    }//GEN-LAST:event_txtNombreKeyPressed
+
+    private void txtStockKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtStockKeyPressed
+        //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txtPrecio.requestFocus();
+        }
+    }//GEN-LAST:event_txtStockKeyPressed
+
+    private void txtPrecioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyPressed
+        //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txtDescripcion.requestFocus();
+        }
+    }//GEN-LAST:event_txtPrecioKeyPressed
+
+    private void txtDescripcionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyPressed
+        //METODO O ACCION PARA QUE AL DAR ENTER CAMBIE DE CAMPO DE INGRESO DE DATOS
+        if (evt.getKeyCode() == evt.VK_ENTER) {
+            txtCodigo.requestFocus();
+        }
+    }//GEN-LAST:event_txtDescripcionKeyPressed
+
+    private void txtCodigoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCodigoKeyPressed
+         
+    }//GEN-LAST:event_txtCodigoKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
