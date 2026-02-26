@@ -22,7 +22,7 @@ public class Ctrl_Proveedor {
 
         try {
             PreparedStatement consulta = cn.prepareStatement(
-                    "INSERT INTO proveedor VALUES (?,?,?,?,?,?)");
+                    "INSERT INTO proveedores VALUES (?,?,?,?,?,?)");
 
             consulta.setInt(1, 0); // id_proveedor (AUTO_INCREMENT)
             consulta.setString(2, objeto.getNombre());
@@ -49,7 +49,7 @@ public class Ctrl_Proveedor {
      */
     public boolean existeProveedor(String nombre) {
         boolean respuesta = false;
-        String sql = "SELECT nombre FROM proveedor WHERE nombre = '" + nombre + "';";
+        String sql = "SELECT nombre FROM proveedores WHERE nombre = '" + nombre + "';";
         Statement st;
 
         try {
@@ -74,7 +74,7 @@ public class Ctrl_Proveedor {
 
         boolean respuesta = false;
 
-        String sql = "UPDATE proveedor SET nombre=?, provincia=?, pais=?, contacto=?, idProducto=? "
+        String sql = "UPDATE proveedores SET nombre=?, provincia=?, pais=?, contacto=?, idProducto=? "
                 + "WHERE id_proveedor=?";
 
         try (Connection cn = Conexion.conectar(); PreparedStatement ps = cn.prepareStatement(sql)) {
@@ -105,7 +105,7 @@ public class Ctrl_Proveedor {
 
         try {
             PreparedStatement consulta = cn.prepareStatement(
-                    "DELETE FROM proveedor WHERE id_proveedor = ?");
+                    "DELETE FROM proveedores WHERE id_proveedor = ?");
             consulta.setInt(1, idProveedor);
 
             if (consulta.executeUpdate() > 0) {
@@ -127,7 +127,7 @@ public class Ctrl_Proveedor {
     public List<Proveedor> listar() {
 
         List<Proveedor> lista = new ArrayList<>();
-        String sql = "SELECT * FROM proveedor";
+        String sql = "SELECT * FROM proveedores";
 
         try (Connection cn = Conexion.conectar(); PreparedStatement ps = cn.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
 

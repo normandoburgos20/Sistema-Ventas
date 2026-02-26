@@ -1,6 +1,8 @@
+CREATE DATABASE  IF NOT EXISTS `sistemasventas1` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `sistemasventas1`;
 -- MySQL dump 10.13  Distrib 8.0.34, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: sistema_ventas
+-- Host: 127.0.0.1    Database: sistemasventas1
 -- ------------------------------------------------------
 -- Server version	8.1.0
 
@@ -16,6 +18,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `cabecera_ventas`
+--
+
+DROP TABLE IF EXISTS `cabecera_ventas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cabecera_ventas` (
+  `idCabeceraVenta` int NOT NULL AUTO_INCREMENT,
+  `idCliente` int NOT NULL,
+  `id_usuario` int NOT NULL,
+  `fechaVenta` date NOT NULL,
+  `formaDePago` varchar(45) NOT NULL,
+  `estado` int NOT NULL,
+  PRIMARY KEY (`idCabeceraVenta`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cabecera_ventas`
+--
+
+LOCK TABLES `cabecera_ventas` WRITE;
+/*!40000 ALTER TABLE `cabecera_ventas` DISABLE KEYS */;
+INSERT INTO `cabecera_ventas` VALUES (1,8,0,'2026-02-26','TRANSFERENCIA',1),(2,8,0,'2026-02-26','TRANSFERENCIA',1),(3,8,0,'2026-02-26','TRANSFERENCIA',1),(4,8,0,'2026-02-26','TRANSFERENCIA',1),(5,8,0,'2026-02-26','TRANSFERENCIA',1),(6,8,0,'2026-02-26','EFECTIVO',1),(7,8,0,'2026-02-26','TRANSFERENCIA',1);
+/*!40000 ALTER TABLE `cabecera_ventas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categoria`
 --
 
@@ -28,7 +58,7 @@ CREATE TABLE `categoria` (
   `estado` varchar(45) NOT NULL,
   PRIMARY KEY (`idCategoria`),
   UNIQUE KEY `idcategoria_UNIQUE` (`idCategoria`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +67,7 @@ CREATE TABLE `categoria` (
 
 LOCK TABLES `categoria` WRITE;
 /*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
-INSERT INTO `categoria` VALUES (1,'ropa','1'),(2,'alimentos','1');
+INSERT INTO `categoria` VALUES (3,'Bebidas','1'),(4,'Ropa','1');
 /*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -58,7 +88,7 @@ CREATE TABLE `clientes` (
   `estado` int NOT NULL,
   PRIMARY KEY (`idCliente`),
   UNIQUE KEY `idcliente_UNIQUE` (`idCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -67,40 +97,8 @@ CREATE TABLE `clientes` (
 
 LOCK TABLES `clientes` WRITE;
 /*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-INSERT INTO `clientes` VALUES (5,'samuel','burgos','444040293','384805','Potrero',1),(6,'normando','burgos','285\'985','498048606','Payogasta',1),(7,'normando','Burgos','285\'985','498048606','',1);
+INSERT INTO `clientes` VALUES (8,'Normando','Burgos','44400865','329849841','Payogasta',1);
 /*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `detalle_ventas`
---
-
-DROP TABLE IF EXISTS `detalle_ventas`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `detalle_ventas` (
-  `id_detalle` int NOT NULL AUTO_INCREMENT,
-  `id_venta` int NOT NULL,
-  `id_producto` int NOT NULL,
-  `cantidad` int NOT NULL,
-  `precio_unitario` decimal(10,2) NOT NULL,
-  `subtotal` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id_detalle`),
-  KEY `id_venta` (`id_venta`),
-  KEY `id_producto` (`id_producto`),
-  CONSTRAINT `detalle_ventas_ibfk_1` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id_venta`),
-  CONSTRAINT `detalle_ventas_ibfk_2` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`idProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `detalle_ventas`
---
-
-LOCK TABLES `detalle_ventas` WRITE;
-/*!40000 ALTER TABLE `detalle_ventas` DISABLE KEYS */;
-INSERT INTO `detalle_ventas` VALUES (1,1,1,1,2500.00,2500.00),(2,1,2,1,1200.00,1200.00),(3,2,1,1,2500.00,2500.00),(4,3,4,1,3000.00,3000.00);
-/*!40000 ALTER TABLE `detalle_ventas` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -121,7 +119,7 @@ CREATE TABLE `productos` (
   `estado` int NOT NULL,
   PRIMARY KEY (`idProducto`),
   UNIQUE KEY `id_producto_UNIQUE` (`idProducto`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -130,7 +128,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
-INSERT INTO `productos` VALUES (1,'Yerba Mate 1kg',5088,2500.00,'Alimentos','67789',1,1),(2,'Azúcar 1kg',13,10.00,'Alimentos','47958796',2,1),(3,'Detergente 500ml',20,2000.00,'Limpieza','',0,0),(4,'Aceite 1L',100,3000.00,'Alimentos','',0,0),(14,'remera',12,1.00,'corta','3049\'5093350',1,1);
+INSERT INTO `productos` VALUES (15,'Coco cola',8,10000.00,'Fardo','110001',3,1),(16,'Camisa',11,12000.00,'Manga larga','1100202',4,1);
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -144,11 +142,12 @@ DROP TABLE IF EXISTS `proveedores`;
 CREATE TABLE `proveedores` (
   `id_proveedor` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
-  `provincia` varchar(50) DEFAULT NULL,
-  `pais` varchar(50) DEFAULT NULL,
-  `contacto` varchar(100) DEFAULT NULL,
+  `provincia` varchar(50) NOT NULL,
+  `pais` varchar(50) NOT NULL,
+  `contacto` varchar(100) NOT NULL,
+  `idProducto` int NOT NULL,
   PRIMARY KEY (`id_proveedor`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -157,7 +156,7 @@ CREATE TABLE `proveedores` (
 
 LOCK TABLES `proveedores` WRITE;
 /*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
-INSERT INTO `proveedores` VALUES (1,'Distribuidora Norte','Salta','Argentina','4556743'),(2,'Mayorista Sur','Buenos Aires','Argentina','43467897543'),(3,'Proveedor Limpieza','Córdoba','Argentina','3567676377'),(4,'Alimentos Global','Mendoza','Argentina','125465778');
+INSERT INTO `proveedores` VALUES (5,'Mayorista','Jujuy','Argentina','39852098',15),(6,'Vea','Salta','Argentina','23048034',16);
 /*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,17 +195,13 @@ DROP TABLE IF EXISTS `ventas`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ventas` (
-  `id_venta` int NOT NULL AUTO_INCREMENT,
-  `fecha` datetime DEFAULT CURRENT_TIMESTAMP,
-  `id_usuario` int NOT NULL,
-  `id_cliente` int DEFAULT NULL,
-  `tipo_pago` enum('efectivo','transferencia') NOT NULL,
-  `total` decimal(10,2) NOT NULL,
-  PRIMARY KEY (`id_venta`),
-  KEY `id_usuario` (`id_usuario`),
-  KEY `id_cliente` (`id_cliente`),
-  CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`),
-  CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`idCliente`)
+  `idVenta` int NOT NULL AUTO_INCREMENT,
+  `idCabeceraVenta` int NOT NULL,
+  `idProducto` int NOT NULL,
+  `cantidad` int NOT NULL,
+  `precio` double(10,2) NOT NULL,
+  `totalPagar` double(10,2) NOT NULL,
+  PRIMARY KEY (`idVenta`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -216,13 +211,9 @@ CREATE TABLE `ventas` (
 
 LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
-INSERT INTO `ventas` VALUES (1,'2025-11-19 15:19:31',1,1,'efectivo',3700.00),(2,'2025-11-19 15:19:31',2,2,'transferencia',2500.00),(3,'2025-11-19 15:19:31',1,3,'efectivo',4200.00),(4,'2025-11-19 15:19:31',2,NULL,'efectivo',1200.00);
+INSERT INTO `ventas` VALUES (1,4,15,1,10000.00,10000.00),(2,5,15,1,10000.00,10000.00),(3,6,15,1,10000.00,10000.00),(4,7,15,1,10000.00,10000.00);
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'sistema_ventas'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -233,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-12-16 23:18:57
+-- Dump completed on 2026-02-26 20:38:14
