@@ -50,7 +50,6 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu_nueva_venta = new javax.swing.JMenu();
         jMenuItem11 = new javax.swing.JMenuItem();
-        jMenuItem_gestonar_ventas = new javax.swing.JMenuItem();
         jMenu6 = new javax.swing.JMenu();
         jMenuItem_reportes_clientes = new javax.swing.JMenuItem();
         jMenuItem_reportes_categorias = new javax.swing.JMenuItem();
@@ -168,14 +167,6 @@ public class FrmMenu extends javax.swing.JFrame {
         });
         jMenu_nueva_venta.add(jMenuItem11);
 
-        jMenuItem_gestonar_ventas.setText("Gestionar Ventas");
-        jMenuItem_gestonar_ventas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_gestonar_ventasActionPerformed(evt);
-            }
-        });
-        jMenu_nueva_venta.add(jMenuItem_gestonar_ventas);
-
         jMenuBar1.add(jMenu_nueva_venta);
 
         jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/reportes.png"))); // NOI18N
@@ -255,10 +246,6 @@ public class FrmMenu extends javax.swing.JFrame {
         jDesktopPane_menu.add(interVentas);
         interVentas.setVisible(true);
     }//GEN-LAST:event_jMenuItem11ActionPerformed
-
-    private void jMenuItem_gestonar_ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_gestonar_ventasActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem_gestonar_ventasActionPerformed
 
     private void jMenuItem_nuevo_proveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nuevo_proveedorActionPerformed
 
@@ -360,7 +347,6 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JMenuItem jMenuItem_gestionar_categorias;
-    private javax.swing.JMenuItem jMenuItem_gestonar_ventas;
     private javax.swing.JMenuItem jMenuItem_nueva_Categoria;
     private javax.swing.JMenuItem jMenuItem_nuevo_producto;
     private javax.swing.JMenuItem jMenuItem_nuevo_proveedor;
