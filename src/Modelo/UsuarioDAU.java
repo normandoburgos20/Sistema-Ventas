@@ -5,7 +5,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-
+/**
+ *
+ * @author norma
+ */
 public class UsuarioDAU {
     
     public boolean login(String usuario, String clave) {

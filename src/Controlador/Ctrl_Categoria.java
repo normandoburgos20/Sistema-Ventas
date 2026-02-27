@@ -10,7 +10,7 @@ import Modelo.Categoria;
 
 /**
  *
- * @author Edison Zambrano - © Programador Fantasma
+ * @author norma
  */
 public class Ctrl_Categoria {
 

@@ -313,7 +313,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_busca_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_busca_clienteActionPerformed
-        String clienteBuscar = txt_cliente_buscar.getText().trim(); //Obtiene la cédula ingresada por el usuario
+        String clienteBuscar = txt_cliente_buscar.getText().trim(); //Obtiene la DNI ingresada por el usuario
         Connection cn = Conexion.conectar(); //Conecta con la base de datos
         String sql = "select nombre, apellido from clientes where dni = '" + clienteBuscar + "'"; //Consulta SQL por cédula
         Statement st;
@@ -425,7 +425,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
 
         String medioPago = jComboBox_medioPago.getSelectedItem().toString();
 
-        // 2️⃣ Si es transferencia
+        // ️⃣ Si es transferencia
         if (medioPago.equals("TRANSFERENCIA")) {
 
             JOptionPane.showMessageDialog(null,
@@ -582,6 +582,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
             // ===== GENERAR PDF =====
             VentaPDF pdf = new VentaPDF();
             pdf.DatosCliente(idCliente);
+            pdf.setFormaDePago(formaDePago);   
             pdf.generarFacturaPDF();
 
             // ===== LIMPIAR TODO =====
@@ -699,7 +700,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
         if (medioPago.equals("EFECTIVO")) {
 
             txt_pago.setEnabled(true);
-            txt_cambio.setEnabled(true);
+            txt_cambio.setEnabled(false);
             jButton_calcular_cambio.setEnabled(true);
             txt_cambio.setText("");
 
@@ -824,7 +825,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
         try {
             Connection cn = Conexion.conectar();
 
-            // 1️⃣ Obtener stock actual
+            // obtine el stock actual
             String sqlSelect = "SELECT stock FROM productos WHERE idProducto = ?";
             PreparedStatement pstSelect = cn.prepareStatement(sqlSelect);
             pstSelect.setInt(1, idProducto);
@@ -836,7 +837,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
                 int stockActual = rs.getInt("stock");
                 int nuevoStock = stockActual - cantidadVendida;
 
-                // 2️⃣ Actualizar stock
+                // Actualiza el estock
                 String sqlUpdate = "UPDATE productos SET stock = ? WHERE idProducto = ?";
                 PreparedStatement pstUpdate = cn.prepareStatement(sqlUpdate);
                 pstUpdate.setInt(1, nuevoStock);

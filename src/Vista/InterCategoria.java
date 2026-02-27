@@ -17,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
+ * @author norma
  */
 public class InterCategoria extends javax.swing.JInternalFrame {
 

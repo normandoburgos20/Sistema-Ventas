@@ -2,7 +2,7 @@ package Modelo;
 
 /**
  *
- * @author ediso
+ * @author norma
  */
 public class Cliente {
 

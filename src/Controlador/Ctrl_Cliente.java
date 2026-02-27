@@ -10,6 +10,10 @@ import Modelo.Cliente;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @author norma
+ */
 public class Ctrl_Cliente {
 
     /**

@@ -206,7 +206,7 @@ public class VentaPDF {
             tablaPago.addCell(crearCelda("TOTAL:", boldFont, 2));
             tablaPago.addCell(crearCelda(InterVentas.txt_total_pagar.getText(), boldFont, 2));
 
-            tablaPago.addCell(crearCelda("FORMA DE PAGO:", boldFont, 2));
+            tablaPago.addCell(crearCelda("Forma de pago:", boldFont, 2));
             tablaPago.addCell(crearCelda(formaDePago, boldFont, 2));
 
             doc.add(tablaPago);

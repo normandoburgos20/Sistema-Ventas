@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- *
+ * @author norma
  */
 public class InterCliente extends javax.swing.JInternalFrame {
 

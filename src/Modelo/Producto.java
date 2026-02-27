@@ -1,6 +1,11 @@
 
 package Modelo;
 
+/**
+ *
+ * @author norma
+ */
+
 public class Producto {
 
     //Atributos

@@ -1,4 +1,8 @@
 package Controlador;
+/**
+ *
+ * @author norma
+ */
 
 import conexion.Conexion;
 import java.sql.Connection;

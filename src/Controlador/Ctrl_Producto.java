@@ -8,6 +8,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ *
+ * @author norma
+ */
 
 public class Ctrl_Producto {
      /**
