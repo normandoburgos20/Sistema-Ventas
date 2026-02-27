@@ -43,7 +43,7 @@ public class Reportes {
                 carpeta.mkdirs(); // crea la carpeta
             }
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "Reporte_Clientes.pdf")); // crea archivo pdf
-            Image header = Image.getInstance("src/img/header1.jpg"); // carga imagen encabezado
+            Image header = Image.getInstance("src/img/fondo8.jpeg"); // carga imagen
             header.scaleToFit(650, 1000); // ajusta tamaño de imagen
             header.setAlignment(Chunk.ALIGN_CENTER); // centra imagen
             Paragraph parrafo = new Paragraph(); // crea parrafo
@@ -97,7 +97,7 @@ public class Reportes {
                 carpeta.mkdirs(); // crea carpeta
             }
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "Reporte_Productos.pdf")); // crea archivo pdf
-            Image header = Image.getInstance("src/img/header1.jpg"); // carga encabezado
+            Image header = Image.getInstance("src/img/fondo8.jpeg"); // carga imagen
             header.scaleToFit(650, 1000); // ajusta tamaño
             header.setAlignment(Chunk.ALIGN_CENTER); // centra imagen
             Paragraph parrafo = new Paragraph(); // crea parrafo
@@ -162,13 +162,25 @@ public class Reportes {
                 carpeta.mkdirs(); // crea
             }
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "Reporte_Ventas.pdf")); // crea pdf
-            Image header = Image.getInstance("src/img/header1.jpg"); // carga imagen
+            Image header = Image.getInstance("src/img/fondo8.jpeg"); // carga imagen
             header.scaleToFit(650, 1000); // tamaño
             header.setAlignment(Chunk.ALIGN_CENTER); // centra
-            Paragraph parrafo = new Paragraph(); // parrafo
-            parrafo.setAlignment(Paragraph.ALIGN_CENTER); // centra
-            parrafo.add("Reporte creado por \nSamuel Burgos\n\n"); // autor
-            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY)); // fuente
+            
+            LocalDateTime fechaHoraActual = LocalDateTime.now();
+            DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatoHora = DateTimeFormatter.ofPattern("HH:mm:ss");
+            String fechaFormateada = fechaHoraActual.format(formatoFecha);
+            String horaFormateada = fechaHoraActual.format(formatoHora);
+
+            Paragraph parrafo = new Paragraph();
+            parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+            parrafo.setFont(FontFactory.getFont("Tahoma", 18, Font.BOLD, BaseColor.DARK_GRAY));
+            parrafo.add("Reporte creado por \nSamuel Burgos\n\n\n");
+            parrafo.add("Fecha de creación: " + fechaFormateada + "\n");
+            parrafo.add("Hora de creacion: " + horaFormateada + "\n");
+            parrafo.add("Reporte de Categorias \n\n");
+            
+            
             parrafo.add("Reporte de Ventas \n\n"); // titulo
             documento.open(); // abre pdf
             documento.add(header); // agrega imagen
@@ -182,8 +194,8 @@ public class Reportes {
             try { // segundo try
                 Connection cn = Conexion.conectar(); // conexion
                 PreparedStatement pst = cn.prepareStatement(
-                        "select cv.idCabeceraVenta, concat(c.nombre,' ',c.apellido), cv.valorPagar, cv.fechaVenta, cv.estado "
-                        + "from tb_cabecera_venta cv inner join tb_cliente c on cv.idCliente = c.idCliente"); // sql
+                        "select cv.idCabeceraVenta, concat(c.nombre,' ',c.apellido), cv.formaDePago, cv.fechaVenta, cv.estado "
+                        + "from cabecera_ventas cv inner join clientes c on cv.idCliente = c.idCliente"); // sql
                 ResultSet rs = pst.executeQuery(); // ejecuta
                 if (rs.next()) { // verifica
                     do { // recorrer
@@ -223,7 +235,7 @@ public class Reportes {
                 carpeta.mkdirs(); // crea carpeta fechaActual
             }
             PdfWriter.getInstance(documento, new FileOutputStream(ruta + "Reporte_Categorias.pdf")); // crea pdf
-            Image header = Image.getInstance("src/img/header1.jpg"); // carga imagen
+            Image header = Image.getInstance("src/img/fondo8.jpeg"); // carga imagen
             header.scaleToFit(650, 1000); // ajusta tamaño
             header.setAlignment(Chunk.ALIGN_CENTER); // centra
 

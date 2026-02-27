@@ -38,6 +38,7 @@ public class VentaPDF {
 
     private String fechaActual = "";
     private String nombreArchivoPDFVenta = "";
+    private String formaDePago = "";
 
     //metodo para obtener datos del cliente
     public void DatosCliente(int idCliente) {
@@ -59,177 +60,197 @@ public class VentaPDF {
             System.out.println("Error al obtener datos del cliente: " + e);
         }
     }
+    
+    public void setFormaDePago(String formaDePago) {
+        this.formaDePago = formaDePago;
+    }
 
-    //metodo para generar la factura de venta
+    // ==============================
+    // GENERAR PDF
+    // ==============================
     public void generarFacturaPDF() {
+
+        Document doc = new Document();
+
         try {
 
-            //cargar la fecha actual
-            Date date = new Date();
-            fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
-            //cambiar el formato de la fecha de / a _
-            String fechaNueva = "";
-            for (int i = 0; i < fechaActual.length(); i++) {
-                if (fechaActual.charAt(i) == '/') {
-                    fechaNueva = fechaActual.replace("/", "_");
-                }
+            fechaActual = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+
+            String clienteLimpio = nombreCliente.replaceAll("[^a-zA-Z0-9]", "_");
+            nombreArchivoPDFVenta = "Venta_" + clienteLimpio + "_" + fechaActual + ".pdf";
+
+            // Ruta Documentos/PDF1
+            File carpeta = new File(System.getProperty("user.home")
+                    + File.separator + "Documents"
+                    + File.separator + "PDF1");
+
+            if (!carpeta.exists()) {
+                carpeta.mkdirs();
             }
 
-            nombreArchivoPDFVenta = "Venta_" + nombreCliente + "_" + fechaNueva + ".pdf";
+            File file = new File(carpeta, nombreArchivoPDFVenta);
 
-            FileOutputStream archivo;
-            File file = new File("src/pdf/" + nombreArchivoPDFVenta);
-            archivo = new FileOutputStream(file);
-
-            Document doc = new Document();
-            PdfWriter.getInstance(doc, archivo);
+            PdfWriter.getInstance(doc, new FileOutputStream(file));
             doc.open();
 
-            Image img = Image.getInstance("src/img/ventas.png");
-            Paragraph fecha = new Paragraph();
-            Font negrita = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD, BaseColor.BLUE);
-            fecha.add(Chunk.NEWLINE); //agregar nueva linea
-            fecha.add("Factura: 001" + "\nFecha: " + fechaActual + "\n\n");
+            // ===== COLORES =====
+            BaseColor azulCorporativo = new BaseColor(25, 50, 100);
+            Font tituloFont = new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD, azulCorporativo);
+            Font normalFont = new Font(Font.FontFamily.HELVETICA, 11);
+            Font boldFont = new Font(Font.FontFamily.HELVETICA, 11, Font.BOLD);
+            Font headerWhite = new Font(Font.FontFamily.HELVETICA, 11, Font.BOLD, BaseColor.WHITE);
 
-            PdfPTable Encabezado = new PdfPTable(4);
-            Encabezado.setWidthPercentage(100);
-            Encabezado.getDefaultCell().setBorder(0);//quitar el borde de la tabla
-            //tamaño de las celdas
-            float[] ColumnaEncabezado = new float[]{20f, 30f, 70f, 40f};
-            Encabezado.setWidths(ColumnaEncabezado);
-            Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
-            //agregar celdas
-            Encabezado.addCell(img);
+            // ==============================
+            // LOGO + TITULO
+            // ==============================
+            Image logo = null;
 
-            String ruc = "0987654321001";
-            String nombre = "Normando Burgos";
-            String telefono = "0987654321";
-            String direccion = "Payogasta";
-            String razon = "Tu tienda de comfianza";
+            try {
+                logo = Image.getInstance(
+                        getClass().getResource("/img/tinda.jpeg"));
+                logo.scaleToFit(100, 100);
+            } catch (Exception e) {
+                System.out.println("No se pudo cargar logo: " + e);
+            }
 
-            Encabezado.addCell("");//celda vacia
-            Encabezado.addCell("RUC: " + ruc + "\nNOMBRE: " + nombre + "\nTELEFONO: " + telefono + "\nDIRECCION: " + direccion + "\nRAZON SOCIAL: " + razon);
-            Encabezado.addCell(fecha);
-            doc.add(Encabezado);
+            PdfPTable tablaEncabezado = new PdfPTable(2);
+            tablaEncabezado.setWidthPercentage(100);
+            tablaEncabezado.setWidths(new float[]{30f, 70f});
 
-            //CUERPO
-            Paragraph cliente = new Paragraph();
-            cliente.add(Chunk.NEWLINE);//nueva linea
-            cliente.add("Datos del cliente: " + "\n\n");
-            doc.add(cliente);
+            PdfPCell celdaLogo = new PdfPCell();
+            celdaLogo.setBorder(0);
+            if (logo != null) {
+                celdaLogo.addElement(logo);
+            }
 
-            //DATOS DEL CLIENTE
-            PdfPTable tablaCliente = new PdfPTable(4);
+            PdfPCell celdaTitulo = new PdfPCell();
+            celdaTitulo.setBorder(0);
+
+            Paragraph titulo = new Paragraph("FACTURA DE VENTA\n", tituloFont);
+            titulo.setAlignment(Element.ALIGN_RIGHT);
+
+            Paragraph fecha = new Paragraph("Fecha: " + fechaActual, normalFont);
+            fecha.setAlignment(Element.ALIGN_RIGHT);
+
+            celdaTitulo.addElement(titulo);
+            celdaTitulo.addElement(fecha);
+
+            tablaEncabezado.addCell(celdaLogo);
+            tablaEncabezado.addCell(celdaTitulo);
+
+            doc.add(tablaEncabezado);
+            doc.add(new Paragraph("\n"));
+
+            // ==============================
+            // DATOS CLIENTE
+            // ==============================
+            PdfPTable tablaCliente = new PdfPTable(2);
             tablaCliente.setWidthPercentage(100);
-            tablaCliente.getDefaultCell().setBorder(0);//quitar bordes
-            //tamaño de las celdas
-            float[] ColumnaCliente = new float[]{25f, 45f, 30f, 40f};
-            tablaCliente.setWidths(ColumnaCliente);
-            tablaCliente.setHorizontalAlignment(Element.ALIGN_LEFT);
-            PdfPCell cliente1 = new PdfPCell(new Phrase("DNI: ", negrita));
-            PdfPCell cliente2 = new PdfPCell(new Phrase("Nombre: ", negrita));
-            PdfPCell cliente3 = new PdfPCell(new Phrase("Telefono: ", negrita));
-            PdfPCell cliente4 = new PdfPCell(new Phrase("Direccion: ", negrita));
-            //quitar bordes 
-            cliente1.setBorder(0);
-            cliente2.setBorder(0);
-            cliente3.setBorder(0);
-            cliente4.setBorder(0);
-            //agg celda a la tabla
-            tablaCliente.addCell(cliente1);
-            tablaCliente.addCell(cliente2);
-            tablaCliente.addCell(cliente3);
-            tablaCliente.addCell(cliente4);
-            tablaCliente.addCell(cedulaCliente);
-            tablaCliente.addCell(nombreCliente);
-            tablaCliente.addCell(telefonoCliente);
-            tablaCliente.addCell(direccionCliente);
-            //agregar al documento
+
+            tablaCliente.addCell(crearCelda("DNI:", boldFont, 0));
+            tablaCliente.addCell(crearCelda(cedulaCliente, normalFont, 0));
+
+            tablaCliente.addCell(crearCelda("Nombre:", boldFont, 0));
+            tablaCliente.addCell(crearCelda(nombreCliente, normalFont, 0));
+
+            tablaCliente.addCell(crearCelda("Teléfono:", boldFont, 0));
+            tablaCliente.addCell(crearCelda(telefonoCliente, normalFont, 0));
+
+            tablaCliente.addCell(crearCelda("Dirección:", boldFont, 0));
+            tablaCliente.addCell(crearCelda(direccionCliente, normalFont, 0));
+
             doc.add(tablaCliente);
-            
-            //ESPACIO EN BLANCO
-            Paragraph espacio = new Paragraph();
-            espacio.add(Chunk.NEWLINE);
-            espacio.add("");
-            espacio.setAlignment(Element.ALIGN_CENTER);
-            doc.add(espacio);
-            
-            //AGREGAR LOS PRODUCTOS
+            doc.add(new Paragraph("\n"));
+
+            // ==============================
+            // TABLA PRODUCTOS
+            // ==============================
             PdfPTable tablaProducto = new PdfPTable(4);
             tablaProducto.setWidthPercentage(100);
-            tablaProducto.getDefaultCell().setBorder(0);
-            //tamaño de celdas
-             float[] ColumnaProducto = new float[]{15f, 50f, 15f, 20f};
-             tablaProducto.setWidths(ColumnaProducto);
-             tablaProducto.setHorizontalAlignment(Element.ALIGN_LEFT);
-             PdfPCell producto1 = new PdfPCell(new Phrase("Cantidad: ", negrita));
-             PdfPCell producto2 = new PdfPCell(new Phrase("Descripcion: ", negrita));
-             PdfPCell producto3 = new PdfPCell(new Phrase("Precio Unitario: ", negrita));
-             PdfPCell producto4 = new PdfPCell(new Phrase("Precio Total: ", negrita));
-             //quitar bordes
-             producto1.setBorder(0);
-             producto2.setBorder(0);
-             producto3.setBorder(0);
-             producto4.setBorder(0);
-             //agregar color al encabezadi del producto
-             producto1.setBackgroundColor(BaseColor.LIGHT_GRAY);
-             producto2.setBackgroundColor(BaseColor.LIGHT_GRAY);
-             producto3.setBackgroundColor(BaseColor.LIGHT_GRAY);
-             producto4.setBackgroundColor(BaseColor.LIGHT_GRAY);
-            //agg celda a la tabla
-            tablaProducto.addCell(producto1);
-            tablaProducto.addCell(producto2);
-            tablaProducto.addCell(producto3);
-            tablaProducto.addCell(producto4);
-            
-            for(int i = 0; i < InterVentas.jTable_productos.getRowCount(); i++){
-                String producto = InterVentas.jTable_productos.getValueAt(i, 1).toString();
-                String cantidad = InterVentas.jTable_productos.getValueAt(i, 2).toString();
-                String precio = InterVentas.jTable_productos.getValueAt(i, 3).toString();
-                String total = InterVentas.jTable_productos.getValueAt(i, 7).toString();
-                
-                tablaProducto.addCell(cantidad);
-                tablaProducto.addCell(producto);
-                tablaProducto.addCell(precio);
-                tablaProducto.addCell(total);
+            tablaProducto.setWidths(new float[]{15f, 45f, 20f, 20f});
+
+            tablaProducto.addCell(crearCeldaHeader("Cantidad", headerWhite, azulCorporativo));
+            tablaProducto.addCell(crearCeldaHeader("Descripción", headerWhite, azulCorporativo));
+            tablaProducto.addCell(crearCeldaHeader("P. Unitario", headerWhite, azulCorporativo));
+            tablaProducto.addCell(crearCeldaHeader("Total", headerWhite, azulCorporativo));
+
+            for (int i = 0; i < InterVentas.jTable_productos.getRowCount(); i++) {
+
+                tablaProducto.addCell(crearCelda(
+                        InterVentas.jTable_productos.getValueAt(i, 2).toString(),
+                        normalFont, 1));
+
+                tablaProducto.addCell(crearCelda(
+                        InterVentas.jTable_productos.getValueAt(i, 1).toString(),
+                        normalFont, 0));
+
+                tablaProducto.addCell(crearCelda(
+                        InterVentas.jTable_productos.getValueAt(i, 3).toString(),
+                        normalFont, 1));
+
+                tablaProducto.addCell(crearCelda(
+                        InterVentas.jTable_productos.getValueAt(i, 4).toString(),
+                        normalFont, 1));
             }
-            
-            //agregar al documento
+
             doc.add(tablaProducto);
-            
-            //Total pagar
-            Paragraph info = new Paragraph();
-            info.add(Chunk.NEWLINE);
-            info.add("Total a pagar: " + InterVentas.txt_total_pagar.getText());
-            info.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(info);
-            
-            //Firma
-           Paragraph firma = new Paragraph();
-           firma.add(Chunk.NEWLINE);
-           firma.add("Cancelacion y firma\n\n");
-           firma.add("_______________________");
-           firma.setAlignment(Element.ALIGN_CENTER);
-           doc.add(firma);
-           
-            //Mensaje
-           Paragraph mensaje = new Paragraph();
-           mensaje.add(Chunk.NEWLINE);
-           mensaje.add("¡Gracias por su compra!");
-           mensaje.setAlignment(Element.ALIGN_CENTER);
-           doc.add(mensaje);
-           
-           //cerrar el documento y el archivo
-           doc.close();
-           archivo.close();
-           
-           //abrir el documento al ser generado automaticamente
+            doc.add(new Paragraph("\n"));
+
+            // ==============================
+            // TOTAL + FORMA DE PAGO
+            // ==============================
+            PdfPTable tablaPago = new PdfPTable(2);
+            tablaPago.setWidthPercentage(40);
+            tablaPago.setHorizontalAlignment(Element.ALIGN_RIGHT);
+
+            tablaPago.addCell(crearCelda("TOTAL:", boldFont, 2));
+            tablaPago.addCell(crearCelda(InterVentas.txt_total_pagar.getText(), boldFont, 2));
+
+            tablaPago.addCell(crearCelda("FORMA DE PAGO:", boldFont, 2));
+            tablaPago.addCell(crearCelda(formaDePago, boldFont, 2));
+
+            doc.add(tablaPago);
+
+            doc.add(new Paragraph("\n\n"));
+
+            Paragraph gracias = new Paragraph("¡Gracias por su compra!", boldFont);
+            gracias.setAlignment(Element.ALIGN_CENTER);
+            doc.add(gracias);
+
+            doc.close();
+
             Desktop.getDesktop().open(file);
-            
-            
-        } catch (DocumentException | IOException e) {
-            System.out.println("Error en: " + e);
+
+        } catch (Exception e) {
+            System.out.println("Error PDF: " + e);
         }
     }
 
+    // ==============================
+    // CELDAS AUXILIARES
+    // ==============================
+    private PdfPCell crearCelda(String texto, Font fuente, int alineacion) {
+
+        PdfPCell celda = new PdfPCell(new Phrase(texto, fuente));
+        celda.setPadding(6);
+        celda.setBorder(0);
+
+        if (alineacion == 1) {
+            celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+        } else if (alineacion == 2) {
+            celda.setHorizontalAlignment(Element.ALIGN_RIGHT);
+        }
+
+        return celda;
+    }
+
+    private PdfPCell crearCeldaHeader(String texto, Font fuente, BaseColor fondo) {
+
+        PdfPCell celda = new PdfPCell(new Phrase(texto, fuente));
+        celda.setBackgroundColor(fondo);
+        celda.setHorizontalAlignment(Element.ALIGN_CENTER);
+        celda.setPadding(8);
+
+        return celda;
+    }
 }

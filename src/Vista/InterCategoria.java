@@ -47,9 +47,9 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         btnEliminar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        jLabel_wallpaper = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_categorias = new javax.swing.JTable();
+        jLabel_wallpaper = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -68,6 +68,7 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         txt_descripcion.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 170, -1));
 
+        btnGuardar1.setBackground(new java.awt.Color(51, 255, 0));
         btnGuardar1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGuardar1.setText("Guardar");
         btnGuardar1.addActionListener(new java.awt.event.ActionListener() {
@@ -77,6 +78,7 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnGuardar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, 30));
 
+        btnActualizar.setBackground(new java.awt.Color(255, 153, 0));
         btnActualizar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +88,7 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, -1, 30));
 
+        btnEliminar.setBackground(new java.awt.Color(255, 0, 0));
         btnEliminar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +98,7 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 100, -1, 30));
 
+        btnLimpiar.setBackground(new java.awt.Color(204, 255, 255));
         btnLimpiar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -113,9 +117,7 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, -1, 30));
 
-        jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo2.jpg"))); // NOI18N
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 150));
-
+        jTable_categorias.setBackground(new java.awt.Color(255, 204, 204));
         jTable_categorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -130,6 +132,9 @@ public class InterCategoria extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable_categorias);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 420, 200));
+
+        jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo5.jpeg"))); // NOI18N
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

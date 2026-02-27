@@ -75,7 +75,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
         txt_total_pagar.setText("0.0");
 
         //insertar imagen en nuestro JLabel
-        ImageIcon wallpaper = new ImageIcon("src/img/fondo2.jpg");
+        ImageIcon wallpaper = new ImageIcon("src/img/111.jpeg");
         Icon icono = new ImageIcon(wallpaper.getImage().getScaledInstance(800, 600, WIDTH));
         jLabel_wallpaper.setIcon(icono);
         this.repaint();
@@ -203,6 +203,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton_busca_cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 80, -1));
 
+        jButton_añadir_producto.setBackground(new java.awt.Color(204, 102, 255));
         jButton_añadir_producto.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_añadir_producto.setText("Añadir Productos");
         jButton_añadir_producto.addActionListener(new java.awt.event.ActionListener() {
@@ -212,9 +213,11 @@ public class InterVentas extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jButton_añadir_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 150, 70));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTable_productos.setBackground(new java.awt.Color(204, 255, 204));
         jTable_productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -235,9 +238,9 @@ public class InterVentas extends javax.swing.JInternalFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 510, 360));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 540, 400));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 540, 400));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(204, 204, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -265,7 +268,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
         txt_cambio.setEnabled(false);
         jPanel2.add(txt_cambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, 120, -1));
 
-        jButton_calcular_cambio.setBackground(new java.awt.Color(51, 255, 255));
+        jButton_calcular_cambio.setBackground(new java.awt.Color(51, 51, 255));
         jButton_calcular_cambio.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_calcular_cambio.setText("Calcular Cambio");
         jButton_calcular_cambio.addActionListener(new java.awt.event.ActionListener() {
@@ -292,7 +295,7 @@ public class InterVentas extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 150, 230, 270));
 
-        jButton_RegistrarVenta.setBackground(new java.awt.Color(51, 255, 255));
+        jButton_RegistrarVenta.setBackground(new java.awt.Color(51, 255, 0));
         jButton_RegistrarVenta.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton_RegistrarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/carrito.png"))); // NOI18N
         jButton_RegistrarVenta.setText("Registrar Venta");

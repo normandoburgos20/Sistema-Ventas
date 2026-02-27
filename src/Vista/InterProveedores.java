@@ -72,11 +72,13 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
         lblPrecio4 = new javax.swing.JLabel();
         lblPrecio = new javax.swing.JLabel();
         jComboBox_producto = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnGuardar.setBackground(new java.awt.Color(102, 255, 51));
         btnGuardar.setText("Guardar");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,6 +87,7 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 206, -1, -1));
 
+        btnActualizar.setBackground(new java.awt.Color(255, 153, 0));
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,6 +96,7 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(114, 206, -1, -1));
 
+        btnEliminar.setBackground(new java.awt.Color(255, 0, 51));
         btnEliminar.setText("Eliminar");
         btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,6 +105,7 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(213, 206, -1, -1));
 
+        btnLimpiar.setBackground(new java.awt.Color(255, 255, 102));
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +147,7 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
         });
         getContentPane().add(txtProvincia, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 40, 125, -1));
 
+        tablaProveedores.setBackground(new java.awt.Color(255, 204, 255));
         tablaProveedores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -202,6 +208,10 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(jComboBox_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 170, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/fondo5.jpeg"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 510, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -441,6 +451,7 @@ public final class InterProveedores extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> jComboBox_producto;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPrecio;

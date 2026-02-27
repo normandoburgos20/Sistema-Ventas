@@ -1,6 +1,7 @@
 package Vista;
 
 import Controlador.Reportes;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JDesktopPane;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 public class FrmMenu extends javax.swing.JFrame {
 
     public static JDesktopPane jDesktopPane_menu;
+    
 
     public FrmMenu() {
         initComponents();
@@ -24,6 +26,7 @@ public class FrmMenu extends javax.swing.JFrame {
         this.setLayout(null);
 
         jDesktopPane_menu = new JDesktopPane();
+        
 
         int ancho = Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -45,7 +48,6 @@ public class FrmMenu extends javax.swing.JFrame {
         jMenuItem_nuevo_producto = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem_nueva_Categoria = new javax.swing.JMenuItem();
-        jMenuItem_gestionar_categorias = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu_nueva_venta = new javax.swing.JMenu();
@@ -65,6 +67,7 @@ public class FrmMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        nuevo_proveedor.setBackground(new java.awt.Color(255, 204, 255));
         nuevo_proveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/proveedores.jpg"))); // NOI18N
         nuevo_proveedor.setText("PROVEEDORES");
         nuevo_proveedor.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
@@ -120,16 +123,6 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem_nueva_Categoria);
-
-        jMenuItem_gestionar_categorias.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jMenuItem_gestionar_categorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/categ.png"))); // NOI18N
-        jMenuItem_gestionar_categorias.setText("Gestionar Categorias");
-        jMenuItem_gestionar_categorias.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_gestionar_categoriasActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jMenuItem_gestionar_categorias);
 
         jMenuBar1.add(jMenu4);
 
@@ -268,10 +261,6 @@ public class FrmMenu extends javax.swing.JFrame {
         interCategorias.setVisible(true);
     }//GEN-LAST:event_jMenuItem_nueva_CategoriaActionPerformed
 
-    private void jMenuItem_gestionar_categoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_gestionar_categoriasActionPerformed
-
-    }//GEN-LAST:event_jMenuItem_gestionar_categoriasActionPerformed
-
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         InterCliente interCliente =new InterCliente();
         jDesktopPane_menu.add(interCliente);
@@ -346,7 +335,6 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JMenuItem jMenuItem_gestionar_categorias;
     private javax.swing.JMenuItem jMenuItem_nueva_Categoria;
     private javax.swing.JMenuItem jMenuItem_nuevo_producto;
     private javax.swing.JMenuItem jMenuItem_nuevo_proveedor;
